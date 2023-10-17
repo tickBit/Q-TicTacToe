@@ -4,8 +4,10 @@
 
 - Train.ipynb can be used to train a Q-table
 
-- The implementation relies on random initialization. In my experiments the result wasn't always optimal when using current timestamp as random seed. A random number is used to determine whether to explore (randomly make a valid move) or to exploit (use the Q-table). If random number is smaller than epsilon, exploration is used, otherwise exploitation. Epsilon decreases and one should fine balance with random exploration and exploitation. At first there should be more exploration, eventually more exploitation.
-
-- The random seed is set in the Agent class
+- The implementation relies on random initialization. My first implementation used 42 as random seed. This implementation uses current timestamp as seed. Hopefully this gives now always good results. See the Train Jupyter notebook for more info.
 
 - Play-TicTacToe-from-saved-Q-table.py can be used to play the game with a saved Q-table
+
+## About creating the Q-table
+
+At first there should be more exploration, eventually more exploitation. But in case the algorithm keeps repeating itself some randomness is useful in case the algorithm doen't learn anything new anymore..
