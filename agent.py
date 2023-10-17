@@ -19,45 +19,25 @@ class Agent:
         self.rounds = 0
         self.games = 0
 
-        random.seed(datetime.datetime.now().timestamp())
-
+        #random.seed(datetime.datetime.now().timestamp())
+        random.seed(111)
+    
     def get_action(self, state, valid_actions, episode):
 
         self.rounds += 1
 
         # You can experiment with this to balance between exploration and exploitation
 
-        # if you want to be sure you'll get an optimal Q-table, you can use the following code with random.seed(42):
-        """
-        if random.random() < self.epsilon:
-            return random.choice(valid_actions), rnd
-        best = self.qagent.get_q_action(state)
+        rnd = random.random()
 
-        if best is None:
-            return random.choice(valid_actions), rnd
-        
-        return best, rnd
-        """
         # Exploration or exploitation
-        rnd = np.random.random()           
-
-
         if rnd < self.epsilon:
             self.explorations += 1
-            return np.random.choice(valid_actions), rnd
-        else:
-            if self.games < self.epochs * 0.3:
-
-                rnd = np.random.random() * 0.1          
-
-                if rnd < self.epsilon:
-                    self.explorations += 1
-                    return np.random.choice(valid_actions), rnd
-            
+            return random.choice(valid_actions), rnd
         best = self.qagent.get_q_action(state)
 
         if best is None:
-            return np.random.choice(valid_actions), rnd
+            return random.choice(valid_actions), rnd
         
         return best, rnd
     
@@ -85,7 +65,7 @@ class Agent:
 
                 if winner or env.isDraw():
                     if winner == 1: pos_rewards += 1
-                    if env.isDraw: draws += 1
+                    if env.isDraw(): draws += 1
 
                     self.games += 1
 
@@ -113,9 +93,7 @@ class Agent:
             self.rewards_draw.append(draws)
 
             
-            
-            if self.epsilon > min_epsilon: self.epsilon = min_epsilon + (max_epsilon - min_epsilon)*np.exp(-decay_rate*episode)
-            
+            self.epsilon = min_epsilon + (max_epsilon - min_epsilon)*np.exp(-decay_rate*episode)
             if episode % 1000 == 0: print("Epoch", episode, "Epsilon", self.epsilon, "Random number", rnd, "Epsilon < random number: ", self.epsilon < rnd)
 
         print("Exploration rate: ", round(self.explorations / self.rounds, 4))

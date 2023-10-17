@@ -3,7 +3,7 @@ import pickle
 from tictactoe import TicTacToe
 
 # put here your q_table
-with open('./2023-10-16-23-51-44.pickle', 'rb') as handle:
+with open('./2023-10-18-01-30-02.pickle', 'rb') as handle:
     q_table = pickle.load(handle)
 
 env = TicTacToe()
