@@ -7,7 +7,7 @@ class Q:
         self.GAMMA = GAMMA      # discount rate
         self.q_table = defaultdict(defaultdict)
 
-        # the initial state is set to 0.0, if you want to emphasize position 4, set other values initially for example to -1.0
+        # the initial state is set to 0.0
         for i in range(9):  
             self.q_table["[0 0 0 0 0 0 0 0 0]"][i] = 0.0
 
