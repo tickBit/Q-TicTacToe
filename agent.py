@@ -22,7 +22,7 @@ class Agent:
         #random.seed(datetime.datetime.now().timestamp())
         random.seed(111)
     
-    def get_action(self, state, valid_actions, episode):
+    def get_action(self, state, valid_actions):
 
         self.rounds += 1
 
@@ -47,6 +47,7 @@ class Agent:
     def learn(self):
         env = TicTacToe()
 
+        # the below parameters affect the exploration and expoitation, too
         min_epsilon = 0.01
         max_epsilon = 1.0
         decay_rate = 0.001
@@ -60,7 +61,7 @@ class Agent:
 
             while True:
                 state = env.getState()
-                action, rnd = self.get_action(state, env.getValidMoves() , episode)
+                action, rnd = self.get_action(state, env.getValidMoves())
                 winner = env.play(action)
 
                 if winner or env.isDraw():

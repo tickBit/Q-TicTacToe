@@ -34,7 +34,7 @@ class Q:
     def get_Q_table(self):
         return self.q_table
 
-    # get the key of best Q-value for a position a on the game board
+    # get the key of best Q-value for a state a on the game board
     def get_q_action(self, state):
         table = self.q_table[state]
         if not table:
